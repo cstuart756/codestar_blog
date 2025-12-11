@@ -23,3 +23,4 @@ urlpatterns = [
     path('blog/', blog_views.blog_home, name='blog_home'),
 ]
 
+
