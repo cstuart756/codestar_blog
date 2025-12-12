@@ -1,10 +1,14 @@
-# DEBUG should be False for deployment
+from pathlib import Path
+import os
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = 'replace-with-your-own-secret-key'
+
 DEBUG = False
 
-# Add your Heroku app hostname
-ALLOWED_HOSTS = ['stu-blog-app.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["stu-blog-app-d00fa4d64b60.herokuapp.com", '127.0.0.1', 'localhost']
 
-# Ensure blog app is installed
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,10 +29,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+ROOT_URLCONF = 'codestar.urls'
+
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -40,3 +48,18 @@ TEMPLATES = [
         },
     },
 ]
+
+WSGI_APPLICATION = 'codestar.wsgi.application'
+ASGI_APPLICATION = 'codestar.asgi.application'
+
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
